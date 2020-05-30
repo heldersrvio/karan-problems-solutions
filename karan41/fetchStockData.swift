@@ -8,41 +8,6 @@
 
 import Alamofire
 
-struct MetaData: Codable{
-    let information, symbol, lastRefreshed, interval, outputSize, timeZone: String
-    
-    enum CodingKeys: String, CodingKey{
-        case information = "1. Information"
-        case symbol = "2. Symbol"
-        case lastRefreshed = "3. Last Refreshed"
-        case interval = "4. Interval"
-        case outputSize = "5. Output Size"
-        case timeZone = "6. Time Zone"
-    }
-}
-
-struct SnapShot: Codable{
-    let open, high, low, close, volume: String
-    
-    enum CodingKeys: String, CodingKey{
-        case open = "1. open"
-        case high = "2. high"
-        case low = "3. low"
-        case close = "4. close"
-        case volume = "5. volume"
-    }
-}
-
-struct Stock: Codable{
-    let metaData: MetaData
-    let timeSeries5min: [String: SnapShot]
-    
-    enum CodingKeys: String, CodingKey{
-        case metaData = "Meta Data"
-        case timeSeries5min = "Time Series (5min)"
-    }
-}
-
 func fetchStockJSON(_ stockSymbol: String, completionHandler: @escaping (String, String) -> ()){
     let date = Date().addingTimeInterval(-6*3600)
     let formatter = DateFormatter()
